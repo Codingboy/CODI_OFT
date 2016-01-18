@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="CODI_OFT">
+	<Package name="Main">
+		<Key ID="STR_CODI_OFT_unknown">
+			<Original>Unknown</Original>
+			<German>Unbekannt</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_inf">
+			<Original>Infantry</Original>
+			<German>Infantrie</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_motInf">
+			<Original>Motorised Infantry</Original>
+			<German>Motorisierte Infantrie</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_mechInf">
+			<Original>Mechanised Infantry</Original>
+			<German>Mechanisierte Infantrie</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_tank">
+			<Original>Armoured</Original>
+			<German>Gepanzert</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_rec">
+			<Original>Reconnaissance</Original>
+			<German>Aufklärung</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_heli">
+			<Original>Rotary Wing</Original>
+			<German>Drehflügler</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_plane">
+			<Original>Fixed Wing</Original>
+			<German>Starrflügler</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_uav">
+			<Original>UAV</Original>
+			<German>UAV</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_arty">
+			<Original>Artillery</Original>
+			<German>Artillerie</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_mortar">
+			<Original>Mortar</Original>
+			<German>Mörser</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_naval">
+			<Original>Naval</Original>
+			<German>Marine</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_hq">
+			<Original>HQ</Original>
+			<German>HQ</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_inst">
+			<Original>Installation</Original>
+			<German>Aufbau</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_blufor">
+			<Original>Blufor</Original>
+			<German>Blufor</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_opfor">
+			<Original>Opfor</Original>
+			<German>Opfor</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_independent">
+			<Original>Independent</Original>
+			<German>Unabhängig</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_civilian">
+			<Original>Civilian</Original>
+			<German>Zivil</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_car">
+			<Original>Car</Original>
+			<German>Auto</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_heli2">
+			<Original>Helicopter</Original>
+			<German>Hubschrauber</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_plane2">
+			<Original>Aeroplane</Original>
+			<German>Flugzeug</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_boat">
+			<Original>Boat</Original>
+			<German>Boot</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_grp0">
+			<Original>Buddyteam (1-2)</Original>
+			<German>Buddyteam (1-2)</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_grp1">
+			<Original>Fireteam (3-6)</Original>
+			<German>Trupp (3-6)</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_grp2">
+			<Original>Squad (7-12)</Original>
+			<German>Gruppe (7-12)</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_grp3">
+			<Original>Section (13-24)</Original>
+			<German>Zug (13-24)</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_grp4">
+			<Original>Platoon (25-48)</Original>
+			<German>Staffel (25-48)</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_grp5">
+			<Original>Company (49-96)</Original>
+			<German>Kompanie (49-96)</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_grp6">
+			<Original>Battalion (97-192)</Original>
+			<German>Bataillon (97-192)</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_wp">
+			<Original>Waypoint</Original>
+			<German>Wegpunkt</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_wp2">
+			<Original>Waypoint (named)</Original>
+			<German>Wegpunkt (benannt)</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_lz">
+			<Original>Landingzone (named)</Original>
+			<German>Landezone (benannt)</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_artyTarget">
+			<Original>Artillerytarget (named)</Original>
+			<German>Artillerieziel (benannt)</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_grave">
+			<Original>Casualty Concentration Point (named)</Original>
+			<German>Verwundetensammelstelle (benannt)</German>
+		</Key>
+		<Key ID="STR_CODI_OFT_mine">
+			<Original>Mine</Original>
+			<German>Mine</German>
+		</Key>
+	</package>
+</Project>
