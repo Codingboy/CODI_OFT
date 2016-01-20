@@ -40,8 +40,9 @@ if (hasInterface) then
 		player addAction["Spotrep", {call CODI_OFT_fnc_createSpotRep}, [], 10, false, true, "", "((currentWeapon _target) in CODI_OFT_spotrepItems) && CODI_OFT_hasOFT"];
 	}];
 	[] spawn {
-		private["_trackedUAV"];
+		private["_trackedUAV","_trackedVehicle"];
 		_trackedUAV = [];
+		_trackedVehicle = [];
 		while {true} do
 		{
 			{
@@ -52,6 +53,14 @@ if (hasInterface) then
 				};
 			}
 			forEach allUnitsUAV;
+			{
+				if (!(_x in _trackedVehicle)) then
+				{
+					_trackedVehicle pushBack _x;
+					_x addAction["Spotrep", {call CODI_OFT_fnc_createSpotRep}, [], 10, false, true, "", "((gunner _target == player) || (commander _target == player)) && CODI_OFT_hasOFT"];
+				};
+			}
+			forEach vehicles;
 			sleep 60;
 		};
 	};

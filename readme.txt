@@ -19,7 +19,7 @@ Move mouse over marker, hold ctrl and rightclick.
 
 Special markers like waypoints have a color. When another group is moving your markers, the marker is assigned to this group and the color and name changes.
 
-Markers can also be placed at the position the player is looking to when he has a rangefinder (or similar) or is in a UAV (or similar).
+Markers can also be placed at the position the player is looking to when he has a rangefinder (or similar) or is in a UAV (or similar) or is a gunner/commander of a vehicle.
 
 In the right upper corner on the Map is the distance and the angle displayed from a position to the mouseposition.
 To set the position hold ctrl and leftclick where you want.
@@ -29,3 +29,4 @@ To make it track your own position hold ctrl and leftclick on yourself.
 
 ACE:
 You need an CODI_OFT_Tablet to use the opfortracker.
+It is not possible to see enemy markers if you collect an enemytracker.
