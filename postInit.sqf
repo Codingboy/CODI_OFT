@@ -3,7 +3,7 @@ if (isServer) then
 	CODI_OFT_side = "";
 	CODI_OFT_counter = [];
 	CODI_OFT_groupColors = [];
-	CODI_OFT_possibleMarkerColors = ["ColorBlue","ColorGreen","ColorOrange","ColorRed","ColorPink","ColorBrown","ColorGrey","ColorBlack","ColorWhite","ColorKhaki"];
+	CODI_OFT_possibleMarkerColors = ["ColorBlue","ColorGreen","ColorOrange","ColorRed","ColorPink","ColorBrown","ColorBlack","ColorWhite","ColorKhaki"];
 };
 CODI_OFT_markers = [];
 if (hasInterface) then
@@ -24,6 +24,7 @@ if (hasInterface) then
 	CODI_OFT_mousePosWorld = [0,0];
 	CODI_OFT_spotrepItems = ["Rangefinder", "ACE_Yardage450", "ACE_Vector", "Laserdesignator", "Laserdesignator_02", "Laserdesignator_03"];
 	CODI_OFT_measurePlayer = true;
+	CODI_OFT_changeDirMarker = "";
 	waitUntil{!isNull player};
 	CODI_OFT_side = side player;
 	CODI_OFT_group = group player;
@@ -97,6 +98,7 @@ if (hasInterface) then
 		{
 			waitUntil{visibleMap};
 			["CODI_OFT_recalculateDistance", "onEachFrame", {[] call CODI_OFT_fnc_recalculateDistance;}] call BIS_fnc_addStackedEventHandler;
+			["CODI_OFT_handleDir", "onEachFrame", {[] call CODI_OFT_fnc_handleDir;}] call BIS_fnc_addStackedEventHandler;
 			if (isClass (configFile >> "CfgPatches" >> "CODI_OFT_ACE")) then
 			{
 				if (!(CODI_OFT_hasOFT isEqualTo ([player, "CODI_OFT_Tablet"] call ace_common_fnc_hasItem))) then
@@ -113,6 +115,7 @@ if (hasInterface) then
 			};
 			waitUntil{!visibleMap};
 			["CODI_OFT_recalculateDistance", "onEachFrame"] call BIS_fnc_removeStackedEventHandler;
+			["CODI_OFT_handleDir", "onEachFrame"] call BIS_fnc_removeStackedEventHandler;
 		};
 	};
 	[] execVM "\CODI_OFT\ui.sqf";

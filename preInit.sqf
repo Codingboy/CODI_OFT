@@ -92,7 +92,7 @@ CODI_OFT_fnc_createMarkerLocal = {
 		}
 		forEach CODI_OFT_counter;
 	};
-	CODI_OFT_markers pushBack [_marker, _marker2, _markerTime, _side, _markerPos, _markerType, _markerColor, _markerGroupSize, _markerText];comment "TODO restructure per side";
+	CODI_OFT_markers pushBack [_marker, _marker2, _markerTime, _side, _markerPos, _markerType, _markerColor, _markerGroupSize, _markerText, "", -1];comment "TODO restructure per side";
 };
 CODI_OFT_fnc_createMarkerGlobal = {
 	private["_markerPos","_markerType","_markerColor","_markerGroupSize"];
@@ -160,6 +160,10 @@ CODI_OFT_fnc_deleteMarkerLocal = {
 				if ((_toBeDeleted select 1) != "") then
 				{
 					deleteMarkerLocal (_toBeDeleted select 1);
+				};
+				if ((_toBeDeleted select 9) != "") then
+				{
+					deleteMarkerLocal (_toBeDeleted select 9);
 				};
 			};
 		};
@@ -407,6 +411,21 @@ CODI_OFT_fnc_handleMouseMoving = {
 	_control = _this select 0;
 	CODI_OFT_mousePos = [_this select 1, _this select 2];
 	CODI_OFT_mousePosWorld = _control ctrlMapScreenToWorld CODI_OFT_mousePos;
+	if (CODI_OFT_changeDirMarker != "") then
+	{
+		{
+			if ((_x select 0) == CODI_OFT_changeDirMarker) then
+			{
+				_pos = _x select 4;
+				_mapControl = (findDisplay  12) displayCtrl 51;
+				_mousePos = _mapControl ctrlMapScreenToWorld CODI_OFT_mousePos;
+				_dir = [_pos, _mousePos] call BIS_fnc_dirTo;
+				_x set [10, _dir];
+				CODI_OFT_markers set [_forEachIndex, _x];
+			};
+		}
+		forEach CODI_OFT_markers;
+	};
 	false
 };
 CODI_OFT_fnc_tryDeleteMarkerGlobal = {
@@ -437,9 +456,10 @@ CODI_OFT_fnc_tryDeleteMarkerGlobal = {
 	};
 };
 CODI_OFT_fnc_handleMouseButtonClick = {
-	private["_handled","_ctrl","_button","_mapControl","_pos","_nearesIndex","_nearestDistance","_distance","_marker"];
+	private["_entry","_shift","_handled","_ctrl","_button","_mapControl","_pos","_nearesIndex","_nearestDistance","_distance","_marker"];
 	_mapControl = _this select 0;
 	_button = _this select 1;
+	_shift = _this select 4;
 	_ctrl = _this select 5;
 	_handled = false;
 	if (_ctrl) then
@@ -485,12 +505,34 @@ CODI_OFT_fnc_handleMouseButtonClick = {
 			};
 		};
 	};
+	if (_shift) then
+	{
+		_pos = _mapControl ctrlMapScreenToWorld CODI_OFT_mousePos;
+		_nearesIndex = -1;
+		_nearestDistance = 999999;
+		{
+			_distance = _pos distance (getMarkerPos (_x select 0));
+			if (_distance < _nearestDistance) then
+			{
+				_nearestDistance = _distance;
+				_nearesIndex = _forEachIndex;
+			};
+		}
+		forEach CODI_OFT_markers;
+		if (_nearesIndex != -1) then
+		{
+			_entry = CODI_OFT_markers select _nearesIndex;
+			_entry set [10, -1];
+			CODI_OFT_markers set [_nearesIndex, _entry];
+		};
+	};
 	_handled
 };
 CODI_OFT_fnc_handleMouseButtonDown = {
-	private["_ctrl","_button","_mapControl","_pos","_nearesIndex","_nearestDistance","_distance","_marker"];
+	private["_shift","_ctrl","_button","_mapControl","_pos","_nearesIndex","_nearestDistance","_distance","_marker"];
 	_mapControl = _this select 0;
 	_button = _this select 1;
+	_shift = _this select 4;
 	_ctrl = _this select 5;
 	if (CODI_OFT_hasOFT) then
 	{
@@ -519,13 +561,33 @@ CODI_OFT_fnc_handleMouseButtonDown = {
 					};
 				};
 			};
+			if (_shift) then
+			{
+				_pos = _mapControl ctrlMapScreenToWorld CODI_OFT_mousePos;
+				_nearesIndex = -1;
+				_nearestDistance = 999999;
+				{
+					_distance = _pos distance (getMarkerPos (_x select 0));
+					if (_distance < _nearestDistance) then
+					{
+						_nearestDistance = _distance;
+						_nearesIndex = _forEachIndex;
+					};
+				}
+				forEach CODI_OFT_markers;
+				if (_nearesIndex != -1) then
+				{
+					CODI_OFT_changeDirMarker = (CODI_OFT_markers select _nearesIndex) select 0;
+				};
+			};
 		};
 	};
 };
 CODI_OFT_fnc_handleMouseButtonUp = {
-	private["_markerColor","_markerType","_pos","_mapControl","_button","_ctrl"];
+	private["_shift","_markerColor","_markerType","_pos","_mapControl","_button","_ctrl"];
 	_mapControl = _this select 0;
 	_button = _this select 1;
+	_shift = _this select 4;
 	_ctrl = _this select 5;
 	if (CODI_OFT_hasOFT) then
 	{
@@ -558,6 +620,20 @@ CODI_OFT_fnc_handleMouseButtonUp = {
 					CODI_OFT_draggedMarker = "";
 				};
 			};
+			if (_shift) then
+			{
+				if (CODI_OFT_changeDirMarker != "") then
+				{
+					{
+						if ((_x select 0) == CODI_OFT_changeDirMarker) then
+						{
+							[CODI_OFT_changeDirMarker, _x select 10] call CODI_OFT_fnc_setMarkerDirGlobal;
+						};
+					}
+					forEach CODI_OFT_markers;
+				};
+			};
+			CODI_OFT_changeDirMarker = "";
 		};
 	};
 };
@@ -656,4 +732,74 @@ CODI_OFT_fnc_recalculateDistance = {
 	_control ctrlSetText (str(round(CODI_OFT_measurePos distance2D CODI_OFT_mousePosWorld))+"m");
 	_control = _display displayCtrl 4998;
 	_control ctrlSetText (str(round([CODI_OFT_measurePos, CODI_OFT_mousePosWorld] call BIS_fnc_dirTo))+"°");
+};
+CODI_OFT_fnc_setMarkerDirLocal = {
+	private["_dir","_marker","_entry"];
+	_marker = _this select 0;
+	_dir = _this select 1;
+	{
+		_entry = _x;
+		if ((_entry select 0) == _marker) then
+		{
+			_entry set [2, time];
+			_entry set [10, _dir];
+			CODI_OFT_markers set [_forEachIndex, _entry];
+		};
+	}
+	forEach CODI_OFT_markers;
+};
+CODI_OFT_fnc_setMarkerDirGlobal = {
+	private["_dir","_marker"];
+	_marker = _this select 0;
+	_dir = _this select 1;
+	[[_marker, _dir], "CODI_OFT_fnc_setMarkerDirLocal", true, false] call BIS_fnc_MP;
+};
+CODI_OFT_fnc_handleDir = {
+	private["_markerName","_dist","_control","_dir","_pos","_marker"];
+	disableSerialization;
+	{
+		_side = _x select 3;
+		_pos = _x select 4;
+		_marker = _x select 9;
+		_dir = _x select 10;
+		_control = (findDisplay 12) displayCtrl 51;
+		_dist = 0.05;
+		if (_side == CODI_OFT_side) then
+		{
+			if (_marker == "") then
+			{
+				if (_dir != -1) then
+				{
+					_pos = _control ctrlMapWorldToScreen _pos;
+					_pos = [(_pos select 0)+_dist*sin(_dir), (_pos select 1)-_dist*cos(_dir)];
+					_pos = _control ctrlMapScreenToWorld _pos;
+					_markerName = (_x select 0)+"_dir";
+					_marker = createMarkerLocal[_markerName, _pos];
+					_marker setMarkerTypeLocal "hd_arrow";
+					_marker setMarkerColorLocal (_x select 6);
+					_marker setMarkerDirLocal _dir;
+					_x set [9, _marker];
+					CODI_OFT_markers set [_forEachIndex, _x];
+				};
+			}
+			else
+			{
+				if (_dir == -1) then
+				{
+					deleteMarkerLocal _marker;
+					_x set [9, ""];
+					CODI_OFT_markers set [_forEachIndex, _x];
+				}
+				else
+				{
+					_pos = _control ctrlMapWorldToScreen _pos;
+					_pos = [(_pos select 0)+_dist*sin(_dir), (_pos select 1)-_dist*cos(_dir)];
+					_pos = _control ctrlMapScreenToWorld _pos;
+					_marker setMarkerPosLocal _pos;
+					_marker setMarkerDirLocal _dir;
+				};
+			};
+		};
+	}
+	forEach CODI_OFT_markers;
 };
