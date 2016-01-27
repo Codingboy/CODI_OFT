@@ -662,6 +662,10 @@ CODI_OFT_fnc_handleMarkerAlpha = {
 						{
 							(_x select 1) setMarkerAlphaLocal _alpha;
 						};
+						if ((_x select 9) != "") then
+						{
+							(_x select 9) setMarkerAlphaLocal _alpha;
+						};
 					}
 					else
 					{
@@ -694,6 +698,10 @@ CODI_OFT_fnc_handleMarkerAlpha = {
 					if ((_x select 1) != "") then
 					{
 						(_x select 1) setMarkerAlphaLocal _alpha;
+					};
+					if ((_x select 9) != "") then
+					{
+						(_x select 9) setMarkerAlphaLocal _alpha;
 					};
 				};
 			};
@@ -743,6 +751,15 @@ CODI_OFT_fnc_setMarkerDirLocal = {
 		{
 			_entry set [2, time];
 			_entry set [10, _dir];
+			(_entry select 0) setMarkerAlphaLocal _alpha;
+			if ((_entry select 1) != "") then
+			{
+				(_entry select 1) setMarkerAlphaLocal _alpha;
+			};
+			if ((_entry select 9) != "") then
+			{
+				(_entry select 9) setMarkerAlphaLocal _alpha;
+			};
 			CODI_OFT_markers set [_forEachIndex, _entry];
 		};
 	}
