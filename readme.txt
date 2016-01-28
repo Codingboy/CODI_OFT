@@ -17,6 +17,12 @@ Press del and move mouse over marker.
 Copy marker:
 Move mouse over marker, hold ctrl and rightclick.
 
+Set direction:
+Hold shift, move mouse over marker, press left mouse button, move mouse in desired direction, release left mouse button.
+
+Reset direction:
+Hold shift, move mouse over marker, click right mouse button.
+
 Special markers like waypoints have a color. When another group is moving your markers, the marker is assigned to this group and the color and name changes.
 
 Markers can also be placed at the position the player is looking to when he has a rangefinder (or similar) or is in a UAV (or similar) or is a gunner/commander of a vehicle.
