@@ -429,23 +429,10 @@ CODI_OFT_fnc_handleMouseMoving = {
 	false
 };
 CODI_OFT_fnc_tryDeleteMarkerGlobal = {
-	private["_mapControl","_pos","_nearesIndex","_nearestDistance","_distance","_marker"];
+	private["_mapControl","_pos","_nearesIndex","_marker"];
 	_mapControl = (findDisplay  12) displayCtrl 51;
 	_pos = _mapControl ctrlMapScreenToWorld CODI_OFT_mousePos;
-	_nearesIndex = -1;
-	_nearestDistance = 999999;
-	{
-		if ((_x select 3) == CODI_OFT_side) then
-		{
-			_distance = _pos distance (getMarkerPos (_x select 0));
-			if (_distance < _nearestDistance) then
-			{
-				_nearestDistance = _distance;
-				_nearesIndex = _forEachIndex;
-			};
-		};
-	}
-	forEach CODI_OFT_markers;
+	_nearesIndex = [_pos] call CODI_OFT_fnc_getNearestMarker;
 	if (_nearesIndex != -1) then
 	{
 		_marker = (CODI_OFT_markers select _nearesIndex) select 0;
@@ -456,7 +443,7 @@ CODI_OFT_fnc_tryDeleteMarkerGlobal = {
 	};
 };
 CODI_OFT_fnc_handleMouseButtonClick = {
-	private["_entry","_shift","_handled","_ctrl","_button","_mapControl","_pos","_nearesIndex","_nearestDistance","_distance","_marker"];
+	private["_entry","_shift","_handled","_ctrl","_button","_mapControl","_pos","_nearesIndex","_marker"];
 	_mapControl = _this select 0;
 	_button = _this select 1;
 	_shift = _this select 4;
@@ -467,17 +454,7 @@ CODI_OFT_fnc_handleMouseButtonClick = {
 		if (_button == 1) then
 		{
 			_pos = _mapControl ctrlMapScreenToWorld CODI_OFT_mousePos;
-			_nearesIndex = -1;
-			_nearestDistance = 999999;
-			{
-				_distance = _pos distance (getMarkerPos (_x select 0));
-				if (_distance < _nearestDistance) then
-				{
-					_nearestDistance = _distance;
-					_nearesIndex = _forEachIndex;
-				};
-			}
-			forEach CODI_OFT_markers;
+			_nearesIndex = [_pos] call CODI_OFT_fnc_getNearestMarker;
 			if (_nearesIndex != -1) then
 			{
 				_marker = (CODI_OFT_markers select _nearesIndex) select 0;
@@ -508,17 +485,7 @@ CODI_OFT_fnc_handleMouseButtonClick = {
 	if (_shift) then
 	{
 		_pos = _mapControl ctrlMapScreenToWorld CODI_OFT_mousePos;
-		_nearesIndex = -1;
-		_nearestDistance = 999999;
-		{
-			_distance = _pos distance (getMarkerPos (_x select 0));
-			if (_distance < _nearestDistance) then
-			{
-				_nearestDistance = _distance;
-				_nearesIndex = _forEachIndex;
-			};
-		}
-		forEach CODI_OFT_markers;
+		_nearesIndex = [_pos] call CODI_OFT_fnc_getNearestMarker;
 		if (_nearesIndex != -1) then
 		{
 			_entry = CODI_OFT_markers select _nearesIndex;
@@ -529,7 +496,7 @@ CODI_OFT_fnc_handleMouseButtonClick = {
 	_handled
 };
 CODI_OFT_fnc_handleMouseButtonDown = {
-	private["_shift","_ctrl","_button","_mapControl","_pos","_nearesIndex","_nearestDistance","_distance","_marker"];
+	private["_shift","_ctrl","_button","_mapControl","_pos","_nearesIndex","_marker"];
 	_mapControl = _this select 0;
 	_button = _this select 1;
 	_shift = _this select 4;
@@ -541,17 +508,7 @@ CODI_OFT_fnc_handleMouseButtonDown = {
 			if (_ctrl) then
 			{
 				_pos = _mapControl ctrlMapScreenToWorld CODI_OFT_mousePos;
-				_nearesIndex = -1;
-				_nearestDistance = 999999;
-				{
-					_distance = _pos distance (getMarkerPos (_x select 0));
-					if (_distance < _nearestDistance) then
-					{
-						_nearestDistance = _distance;
-						_nearesIndex = _forEachIndex;
-					};
-				}
-				forEach CODI_OFT_markers;
+				_nearesIndex = [_pos] call CODI_OFT_fnc_getNearestMarker;
 				if (_nearesIndex != -1) then
 				{
 					_marker = (CODI_OFT_markers select _nearesIndex) select 0;
@@ -564,17 +521,7 @@ CODI_OFT_fnc_handleMouseButtonDown = {
 			if (_shift) then
 			{
 				_pos = _mapControl ctrlMapScreenToWorld CODI_OFT_mousePos;
-				_nearesIndex = -1;
-				_nearestDistance = 999999;
-				{
-					_distance = _pos distance (getMarkerPos (_x select 0));
-					if (_distance < _nearestDistance) then
-					{
-						_nearestDistance = _distance;
-						_nearesIndex = _forEachIndex;
-					};
-				}
-				forEach CODI_OFT_markers;
+				_nearesIndex = [_pos] call CODI_OFT_fnc_getNearestMarker;
 				if (_nearesIndex != -1) then
 				{
 					if (!((getMarkerType (CODI_OFT_markers select _nearesIndex)) in ["waypoint","hd_dot","hd_pickup","hd_destroy","KIA"])) then
@@ -585,6 +532,25 @@ CODI_OFT_fnc_handleMouseButtonDown = {
 			};
 		};
 	};
+};
+CODI_OFT_fnc_getNearestMarker = {
+	private["_distance","_nearestDistance","_nearesIndex","_pos"];
+	_pos = _this select 0;
+	_nearesIndex = -1;
+	_nearestDistance = 999999;
+	{
+		if ((_x select 3) == CODI_OFT_side) then
+		{
+			_distance = _pos distance (getMarkerPos (_x select 0));
+			if (_distance < _nearestDistance) then
+			{
+				_nearestDistance = _distance;
+				_nearesIndex = _forEachIndex;
+			};
+		};
+	}
+	forEach CODI_OFT_markers;
+	_nearesIndex
 };
 CODI_OFT_fnc_handleMouseButtonUp = {
 	private["_shift","_markerColor","_markerType","_pos","_mapControl","_button","_ctrl"];
