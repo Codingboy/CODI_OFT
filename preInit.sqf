@@ -577,7 +577,10 @@ CODI_OFT_fnc_handleMouseButtonDown = {
 				forEach CODI_OFT_markers;
 				if (_nearesIndex != -1) then
 				{
-					CODI_OFT_changeDirMarker = (CODI_OFT_markers select _nearesIndex) select 0;
+					if (!((getMarkerType (CODI_OFT_markers select _nearesIndex)) in ["waypoint","hd_dot","hd_pickup","hd_destroy","KIA"])) then
+					{
+						CODI_OFT_changeDirMarker = (CODI_OFT_markers select _nearesIndex) select 0;
+					};
 				};
 			};
 		};
