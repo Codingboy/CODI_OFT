@@ -524,7 +524,7 @@ CODI_OFT_fnc_handleMouseButtonDown = {
 				_nearesIndex = [_pos] call CODI_OFT_fnc_getNearestMarker;
 				if (_nearesIndex != -1) then
 				{
-					if (!((getMarkerType (CODI_OFT_markers select _nearesIndex)) in ["waypoint","hd_dot","hd_pickup","hd_destroy","KIA"])) then
+					if (!((getMarkerType ((CODI_OFT_markers select _nearesIndex) select 0)) in ["waypoint","hd_dot","hd_pickup","hd_destroy","KIA"])) then
 					{
 						CODI_OFT_changeDirMarker = (CODI_OFT_markers select _nearesIndex) select 0;
 					};
@@ -720,14 +720,14 @@ CODI_OFT_fnc_setMarkerDirLocal = {
 		{
 			_entry set [2, time];
 			_entry set [10, _dir];
-			(_entry select 0) setMarkerAlphaLocal _alpha;
+			(_entry select 0) setMarkerAlphaLocal 1;
 			if ((_entry select 1) != "") then
 			{
-				(_entry select 1) setMarkerAlphaLocal _alpha;
+				(_entry select 1) setMarkerAlphaLocal 1;
 			};
 			if ((_entry select 9) != "") then
 			{
-				(_entry select 9) setMarkerAlphaLocal _alpha;
+				(_entry select 9) setMarkerAlphaLocal 1;
 			};
 			CODI_OFT_markers set [_forEachIndex, _entry];
 		};
