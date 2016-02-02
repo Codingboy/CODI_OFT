@@ -749,7 +749,7 @@ CODI_OFT_fnc_handleDir = {
 		_marker = _x select 9;
 		_dir = _x select 10;
 		_control = (findDisplay 12) displayCtrl 51;
-		_dist = 0.05;
+		_dist = 0.035;
 		if (_side == CODI_OFT_side) then
 		{
 			if (_marker == "") then
@@ -762,6 +762,7 @@ CODI_OFT_fnc_handleDir = {
 					_markerName = (_x select 0)+"_dir";
 					_marker = createMarkerLocal[_markerName, _pos];
 					_marker setMarkerTypeLocal "hd_arrow";
+					_marker setMarkerSizeLocal [0.5, 0.5];
 					_marker setMarkerColorLocal (_x select 6);
 					_marker setMarkerDirLocal _dir;
 					_x set [9, _marker];
