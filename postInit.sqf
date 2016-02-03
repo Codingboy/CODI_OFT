@@ -3,7 +3,7 @@ if (isServer) then
 	CODI_OFT_side = "";
 	CODI_OFT_counter = [];
 	CODI_OFT_groupColors = [];
-	CODI_OFT_possibleMarkerColors = ["ColorBlue","ColorGreen","ColorOrange","ColorRed","ColorPink","ColorBrown","ColorBlack","ColorWhite","ColorKhaki"];
+	CODI_OFT_possibleMarkerColors = ["ColorBlue","ColorGreen","ColorOrange","ColorRed","ColorPink","ColorYellow","ColorBrown","ColorBlack","ColorWhite"];
 };
 CODI_OFT_markers = [];
 if (hasInterface) then
@@ -105,7 +105,7 @@ if (hasInterface) then
 				{
 					CODI_OFT_hasOFT = !CODI_OFT_hasOFT;
 					_mapDisplay = findDisplay  12;
-					for "_i" from 5000 to 5148 do
+					for "_i" from 5000 to 5155 do
 					{
 						_mapControl = _mapDisplay displayCtrl _i;
 						_mapControl ctrlShow CODI_OFT_hasOFT;

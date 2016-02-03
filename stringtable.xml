@@ -13,6 +13,10 @@
 			<Original>Motorised Infantry</Original>
 			<German>Motorisierte Infantrie</German>
 		</Key>
+		<Key ID="STR_CODI_OFT_support">
+			<Original>Support</Original>
+			<German>Nachschub</German>
+		</Key>
 		<Key ID="STR_CODI_OFT_mechInf">
 			<Original>Mechanised Infantry</Original>
 			<German>Mechanisierte Infantrie</German>

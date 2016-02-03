@@ -400,6 +400,10 @@ CODI_OFT_fnc_handleMouseButtonDblClick = {
 		if (_ctrlPressed) then
 		{
 			_pos = _control ctrlMapScreenToWorld _pos;
+			if (CODI_OFT_markerType in ["waypoint","hd_dot","MinefieldAP","hd_pickup","hd_destroy","KIA"]) then
+			{
+				CODI_OFT_markerColor = CODI_OFT_groupColor;
+			};
 			[_pos, CODI_OFT_markerType, CODI_OFT_markerColor, CODI_OFT_markerGroupSize, CODI_OFT_markerText] call CODI_OFT_fnc_createMarkerGlobal;
 			_handled = true;
 		};

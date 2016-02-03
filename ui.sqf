@@ -30,7 +30,7 @@ _btnActions ctrlSetPosition [
 _btnActions ctrlShow true;
 _btnActions ctrlCommit 0;
 
-_type = [localize "STR_CODI_OFT_unknown",localize "STR_CODI_OFT_inf",localize "STR_CODI_OFT_motInf",localize "STR_CODI_OFT_mechInf",localize "STR_CODI_OFT_tank",localize "STR_CODI_OFT_rec",localize "STR_CODI_OFT_heli",localize "STR_CODI_OFT_plane",localize "STR_CODI_OFT_uav",localize "STR_CODI_OFT_arty",localize "STR_CODI_OFT_mortar",localize "STR_CODI_OFT_naval",localize "STR_CODI_OFT_hq",localize "STR_CODI_OFT_inst"];
+_type = [localize "STR_CODI_OFT_unknown",localize "STR_CODI_OFT_inf",localize "STR_CODI_OFT_motInf",localize "STR_CODI_OFT_mechInf",localize "STR_CODI_OFT_tank",localize "STR_CODI_OFT_rec",localize "STR_CODI_OFT_heli",localize "STR_CODI_OFT_plane",localize "STR_CODI_OFT_uav",localize "STR_CODI_OFT_arty",localize "STR_CODI_OFT_mortar",localize "STR_CODI_OFT_naval",localize "STR_CODI_OFT_hq",localize "STR_CODI_OFT_inst",localize "STR_CODI_OFT_support"];
 _color = [(profilenamespace getvariable ['Map_BLUFOR_R',0]), (profilenamespace getvariable ['Map_BLUFOR_G',1]), (profilenamespace getvariable ['Map_BLUFOR_B',1]), (profilenamespace getvariable ['Map_BLUFOR_A',0.8])];
 {
 	_btnActions = _mapDisplay ctrlCreate ["RscButton", _id];
@@ -59,7 +59,7 @@ _color = [(profilenamespace getvariable ['Map_BLUFOR_R',0]), (profilenamespace g
 	_btnActions ctrlCommit 0;
 	_posY = _posY + _height;
 }
-forEach ["b_unknown","b_inf","b_motor_inf","b_mech_inf","b_armor","b_recon","b_air","b_plane","b_uav","b_art","b_mortar","b_naval","b_hq","b_installation"];
+forEach ["b_unknown","b_inf","b_motor_inf","b_mech_inf","b_armor","b_recon","b_air","b_plane","b_uav","b_art","b_mortar","b_naval","b_hq","b_installation","b_support"];
 _posX = _posXAnchor-_width-_width;
 _posY = _posYAnchor;
 _color = [(profilenamespace getvariable ['Map_Independent_R',0]), (profilenamespace getvariable ['Map_Independent_G',1]), (profilenamespace getvariable ['Map_Independent_B',1]), (profilenamespace getvariable ['Map_Independent_A',0.8])];
@@ -90,7 +90,7 @@ _color = [(profilenamespace getvariable ['Map_Independent_R',0]), (profilenamesp
 	_btnActions ctrlCommit 0;
 	_posY = _posY + _height;
 }
-forEach ["n_unknown","n_inf","n_motor_inf","n_mech_inf","n_armor","n_recon","n_air","n_plane","n_uav","n_art","n_mortar","n_naval","n_hq","n_installation"];
+forEach ["n_unknown","n_inf","n_motor_inf","n_mech_inf","n_armor","n_recon","n_air","n_plane","n_uav","n_art","n_mortar","n_naval","n_hq","n_installation","n_support"];
 _posX = _posXAnchor-_width-_width-_width;
 _posY = _posYAnchor;
 _color = [(profilenamespace getvariable ['Map_OPFOR_R',0]), (profilenamespace getvariable ['Map_OPFOR_G',1]), (profilenamespace getvariable ['Map_OPFOR_B',1]), (profilenamespace getvariable ['Map_OPFOR_A',0.8])];
@@ -121,7 +121,7 @@ _color = [(profilenamespace getvariable ['Map_OPFOR_R',0]), (profilenamespace ge
 	_btnActions ctrlCommit 0;
 	_posY = _posY + _height;
 }
-forEach ["o_unknown","o_inf","o_motor_inf","o_mech_inf","o_armor","o_recon","o_air","o_plane","o_uav","o_art","o_mortar","o_naval","o_hq","o_installation"];
+forEach ["o_unknown","o_inf","o_motor_inf","o_mech_inf","o_armor","o_recon","o_air","o_plane","o_uav","o_art","o_mortar","o_naval","o_hq","o_installation","o_support"];
 _posX = _posXAnchor-_width-_width-_width-_width;
 _posY = _posYAnchor;
 _color = [(profilenamespace getvariable ['Map_Unknown_R',0]), (profilenamespace getvariable ['Map_Unknown_G',1]), (profilenamespace getvariable ['Map_Unknown_B',1]), (profilenamespace getvariable ['Map_Unknown_A',0.8])];
@@ -152,9 +152,9 @@ _color = [(profilenamespace getvariable ['Map_Unknown_R',0]), (profilenamespace 
 	_btnActions ctrlCommit 0;
 	_posY = _posY + _height;
 }
-forEach ["n_unknown","n_inf","n_motor_inf","n_mech_inf","n_armor","n_recon","n_air","n_plane","n_uav","n_art","n_mortar","n_naval","n_hq","n_installation"];
+forEach ["n_unknown","n_inf","n_motor_inf","n_mech_inf","n_armor","n_recon","n_air","n_plane","n_uav","n_art","n_mortar","n_naval","n_hq","n_installation","n_support"];
 _posX = _posXAnchor-_width;
-_posY = _posYAnchor+14*_height;
+_posY = _posYAnchor+15*_height;
 _type = [localize "STR_CODI_OFT_grp0",localize "STR_CODI_OFT_grp1",localize "STR_CODI_OFT_grp2",localize "STR_CODI_OFT_grp3",localize "STR_CODI_OFT_grp4",localize "STR_CODI_OFT_grp5",localize "STR_CODI_OFT_grp6"];
 {
 	_btnActions = _mapDisplay ctrlCreate ["RscButton", _id];
@@ -184,7 +184,7 @@ _type = [localize "STR_CODI_OFT_grp0",localize "STR_CODI_OFT_grp1",localize "STR
 }
 forEach ["group_0","group_1","group_2","group_3","group_4","group_5","group_6"];
 _posX = _posXAnchor-_width-_width;
-_posY = _posYAnchor+14*_height;
+_posY = _posYAnchor+15*_height;
 _type = [localize "STR_CODI_OFT_inf",localize "STR_CODI_OFT_car",localize "STR_CODI_OFT_boat",localize "STR_CODI_OFT_heli2",localize "STR_CODI_OFT_plane2"];
 _color = [(profilenamespace getvariable ['Map_Civilian_R',0]), (profilenamespace getvariable ['Map_Civilian_G',1]), (profilenamespace getvariable ['Map_Civilian_B',1]), (profilenamespace getvariable ['Map_Civilian_A',0.8])];
 {
@@ -216,7 +216,7 @@ _color = [(profilenamespace getvariable ['Map_Civilian_R',0]), (profilenamespace
 }
 forEach ["c_unknown","c_car","c_ship","c_air","c_plane"];
 _posX = _posXAnchor-_width-_width-_width;
-_posY = _posYAnchor+14*_height;
+_posY = _posYAnchor+15*_height;
 
 
 
